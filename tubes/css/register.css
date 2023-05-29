@@ -100,10 +100,7 @@ body {
  * #REUSED STYLE
 \*-----------------------------------*/
 
-.container { 
-  padding: 50px;
-  margin: 50px;
-}
+.container { padding: 0 15px; }
 
 .h1,
 .h2,
@@ -212,48 +209,77 @@ header .container {
 
 .navbar .btn-primary { display: none; }
 
-/* Register */
-.register { 
-  padding: 20px;
+/* RESET PASSWORD */
+.register {
+  height: 750px;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  background-color: var(--primary-color);
+}
+.register .container {
+  height: auto;
+  width: 750px;
+  background-color: var(--secondary-color);
+  padding: 25px;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: -2px 2px 12px var(--black-color);
 }
 
-.register-content { margin-bottom: 50px; }
-
-.register-title {
-  color: var(--black-color);
-  margin-bottom: 60px;
+.container h2 {
+  font-size: 40px;
   text-align: center;
-  font-weight: var(--fw-500) !important;
-}
-.register-banner img { 
-  width: 50%;
-  margin: auto;
 }
 
-
-.input-wrapper { margin-bottom: 30px; }
-
-.input-label {
-  color: var(--secondary-color);
-  font-size: var(--fs-6);
-  font-weight: var(--fw-600);
-  margin-bottom: 10px;
+.container .line  {
+  height: 1px;
+  width: 100%;
+  background-color: var(--black-color);
+  margin: 10px 0 20px 0;
 }
 
-.input-field {
+.container input {
+  height: 40px;
+  width: 99%;
+  margin: 5px 0;
+  border: 1px solid var(--black-color);
+  font-size: 15px;
   background: var(--secondary-color);
-  padding: 10px 20px;
-  font-size: var(--fs-6);
+  outline: none;
+  border-radius: 6px;
+  padding: 0px 12px;
 }
 
-.register .btn-primary {
+.container input[type="submit"]
+{
+  height: 45px;
+  border: none;
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  font-size: 20px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.container h3 {
+  font-size: 16px;
+  font-weight: 100;
+  margin: 5px 0 20px 0;
+}
+
+.container h3 a {
+  width: 200px;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 20px;
+  text-decoration: none;
+  margin: 5px 0;
   text-align: center;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 
-.button-list {
-  display: inline-block;
-  width: 100px;
-}
 
 /* FOOTER */
 footer { 
@@ -380,13 +406,6 @@ footer .logo {
     color: var(--blue-color);
   }
 
-  /* Register */
-  .register-title { --fs-2: 32px; }
-
-  .register-banner {
-    margin-inline: auto;
-  }
-
   
 }
 
@@ -486,25 +505,9 @@ footer .logo {
 
   .navbar .btn-primary { display: block; }
 
-  /* Register */
-  .register .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 50px;
-  }
-
-  .register-content { max-width: 400px; }
-
-  .register-title { text-align: center; }
-
-  .register-form { 
-    width: 50%; 
-    margin-top: 20px;
-  }
-
-  .register .btn-primary {
-    width: 134px;
+  /* LOGIN */
+  .wrapper {
+    width: 50%;
   }
   
 

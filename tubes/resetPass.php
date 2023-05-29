@@ -5,8 +5,8 @@ session_start();
 
 require 'backend/functions.php';
 
-$pageName = "Forgot Password";
-$name = "forgot";
+$pageName = "Reset Password";
+$name = "resetPass";
 $errors = [];
 
 // cek cookie 
@@ -19,8 +19,8 @@ if (isset($_SESSION['login']) && isset($_SESSION['ids']) && isset($_SESSION['rls
   exit();
 }
 
-if(isset($_POST['forgotPass'])) {
-  $forgot = forgotPass($_POST);
+if(isset($_POST['resetPass'])) {
+  $resetPass = resetPass($_POST);
 }
 
-require('views/forgot.view.php'); 
+require('views/resetPass.view.php');

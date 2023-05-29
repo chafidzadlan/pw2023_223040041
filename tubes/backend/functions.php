@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // DATABASE
 function dbConn() {
@@ -245,46 +245,68 @@ function tokenResetPass($data) {
 }
 
 // RESET PASSWORD
-function resetPass($data, $token) {
+function forgotPass($data) {
   $db = dbConn();
 
-  $token = htmlspecialchars($token);
-  $password1 = mysqli_real_escape_string($db, $data['password1']);
-  $password2 = mysqli_real_escape_string($db, $data['password2']);
+  $errors = [];
+  $email = $data['email'];
+  $_SESSION['email'] = $email;
 
-  // cek profile
-  if(!$profile = query("SELECT id_users FROM user_token WHERE token = '$token'")[0]) {
-    header("Location: login.php");
-    exit();
+  $query = "SELECT * FROM users WHERE email = '$email'";
+  $result = mysqli_query($db, $query);
+
+  // if query run
+  if($result) {
+    // if email matched
+    if(mysqli_num_rows($result) > 0) {
+      $code = rand(999999, 111111);
+      $updateQuery = "UPDATE users SET code = $code WHERE email = '$email'";
+      $updateResult = mysqli_query($db, $updateQuery);
+      if($updateResult) {
+        $subject = "Email Verification Code";
+        $message = "our verification code is $code";
+        if(mail($email, $subject, $message)) {
+          $message = "We've sent a verification code to your Email <br> $email";
+
+          $_SESSION['message'] = $message;
+          header("Location: verifyEmail.php");
+        } else {
+          $errors['otp_errors'] = 'Failed while sending code!';
+        }
+      } else {
+        $errors['db_errors'] = "Failed while inserting data into database!";
+      }
+    } else {
+      $errors['invalidEmail'] = "Invalid Email Address";
+    }
+  } else {
+    $errors['db_error'] = "Failed while checking email from database!";
   }
+}
 
-  // min. password
+// RESET PASSWORD
+function resetPass($data) {
+  $db = dbConn();
 
-  if (strlen($password1) < 8) {
-    echo "</script>
-            alert('Password minimal 8 karakter');
-          </script>";
-    exit();
+  $password = mysqli_real_escape_string($db, $data['password']);
+  $confirmPassword = mysqli_real_escape_string($db, $data['confirmPassword']);
+
+  $errors = [];
+
+  if(strlen($_POST['password']) < 8) {
+    $errors['password_error'] = 'Use 8 or more characters with a mix of letters, numbers & symbols';
+  } else {
+    // if password not matched so
+    if($password != $confirmPassword) {
+      $errors['password_error'] = 'Password not matched';
+    } else {
+      $email = $_SESSION['email'];
+      $newPassword = password_hash($password, PASSWORD_DEFAULT);  
+      $query = "UPDATE users SET password = '$newPassword' WHERE email = '$email'";
+      $result = mysqli_query($db, $query) or die("Query Failed");
+      header("Location: login.php");
+    }
   }
-
-  if ($password1 !== $password2) {
-    echo "</script>
-            alert('Password tidak sesuai');
-          </script>";
-    exit();
-  }
-
-  // password
-  $password = password_hash($password1, PASSWORD_DEFAULT);
-  $query = "UPDATE users SET password = '$password' WHERE id_users = '$profile[id_users]'";
-  mysqli_query($db, $query);
-
-  // hapus
-  mysqli_query($db, "DELETE FROM user_token WHERE token = '$token'");
-
-  echo "</script>
-          alert('success');
-        </script>";
 }
 
 // CHANGE PASSWORD
@@ -322,10 +344,12 @@ function changePass($data) {
 function login($data) {
   $db = dbConn();
 
-  $username = htmlspecialchars(strtolower(str_replace(' ', '', $data['username'])));
+  $email = htmlspecialchars($data['email']);
   $password =  mysqli_real_escape_string($db, $data['password']);
 
-  if($query = query("SELECT users.id_users, users.password, users.username, users.email , roles.jenis FROM users,  roles WHERE users.id_roles = roles.id_roles AND users.username = '$username'")) {
+  $emailQuery = "SELECT users.id_users, users.password, users.username, users.email , roles.jenis FROM users, roles WHERE users.id_roles = roles.id_roles AND users.email = '$email'";
+
+  if($query = query($emailQuery)) {
     $query = $query[0];
 
     // cek password
@@ -350,11 +374,30 @@ function login($data) {
         header("Location: index.php");
       }
     }
+
+    $passwordQuery = "SELECT users.id_users, users.password, users.username, users.email , roles.jenis FROM users, roles WHERE users.id_roles = roles.id_roles AND users.email = '$email' AND users.password = '$password'";
+    $passwordResult = mysqli_query($db, $passwordQuery);
+    if(mysqli_num_rows($passwordResult) > 0) {
+      $fetchInfo = mysqli_fetch_assoc($passwordResult);
+      $status = $fetchInfo['status'];
+      $name = $fetchInfo['username'];
+      $_SESSION['name'] = $name;
+      $_SESSION['email'] = $fetchInfo['email'];
+      $_SESSION['password'] = $fetchInfo['password'];
+      if($status === 'Verified') {
+        header("Location: index.php");
+      } else {
+        echo "<script>
+                alert('It's look like you haven't still verify your email $email');
+              </script>";
+        header("Location: otp.php");
+      }
+    } else {
+      echo "<script>
+              alert('Password did not matched');
+            </script>";
+    }
   }
-  echo "<script>
-          alert('Username atau Password salah.');
-        </script>";
-  return false;
 }
 
 // REGISTER
@@ -368,11 +411,25 @@ function register($data) {
   $address = htmlspecialchars($data['address']);
   $date = htmlspecialchars($data['date']);
 
+  // generate a random code
+  $code = rand(999999, 111111);
+  // set status
+  $status = "Not Verified";
+
   if (empty($username) || empty($password1) || empty($password2) || empty($email) || empty($address) || empty($date)) {
     echo '<script>
             alert("Field jangan kosong!");
           </script>';
     return false;
+  }
+
+  // check email validation and save information
+  $sql = "SELECT * FROM users WHERE email = '$email'";
+  $res = mysqli_query($db, $sql) or die('query failed');
+  if(mysqli_num_rows($res) > 0) {
+    echo '<script>
+            alert("Email is Already Taken");
+          </script>';
   }
 
   // cek username sudah ada atau belum
@@ -406,11 +463,80 @@ function register($data) {
     $gambar = 'dummy.jpg';
   }
 
-  $password = password_hash($password1, PASSWORD_DEFAULT);
-  $query = "INSERT INTO users VALUES (null, '$username', '$email', '$password', '$address', '$date', '$gambar', 2)";
-  mysqli_query($db, $query);
+    $password = password_hash($password1, PASSWORD_DEFAULT);
+    $query = "INSERT INTO users VALUES (null, '$username', '$email', '$password', '$address', '$date', '$gambar', '$code', '$status', 2)";
+    $result = mysqli_query($db, $query);
 
-  return mysqli_affected_rows($db);
+    // Send Verification Code In Gmail
+    if($result) {
+      $subject = 'Email Verification Code';
+      $message = "our verification code is $code";
+      $sender = 'From: chafidz0505@gmail.com';
+
+      if(mail($email, $subject, $message, $sender)) {
+        $message = "We've sent a verification code to your Email <br> $email";
+
+        $_SESSION['message'] = $message;
+        header("Location: otp.php");
+      } else {
+        $errors['otp_errors'] = 'Failed while sending code!';
+      }
+    } else {
+      $errors['db_errors'] = "Failed while inserting data into database!";
+    }
+}
+
+// Verify Email
+function verifyEmail($data) {
+  $db = dbConn();
+
+  $errors = [];
+  $_SESSION['message'] = "";
+  $OTPverify = mysqli_real_escape_string($db, $data['OTPverify']);
+  $query = "SELECT * FROM users WHERE code = $OTPverify";
+  $result = mysqli_query($db, $query);
+  
+  if($result) {
+    if(mysqli_num_rows($result) > 0) {
+      $newQuery = "UPDATE users SET code = 0";
+      $run = mysqli_query($db, $newQuery);
+      header("Location: resetPass.php");
+    } else {
+      $errors['verification_error'] = "Invalid Verification Code";
+    }
+  } else {
+    $errors['db_error'] = "Failed while checking Verification Code from database!";
+  }
+}
+
+// OTP
+function otp($data) {
+  $db = dbConn();
+
+  $errors = [];
+  $_SESSION['message'] = "";
+  $otp = mysqli_real_escape_string($db, $data['otp']);
+  $query = "SELECT * FROM users WHERE code = $otp";
+  $result = mysqli_query($db, $query);
+
+  if (mysqli_num_rows($result) > 0) {
+    $fetch_data = mysqli_fetch_assoc($result);
+    $fetch_code = $fetch_data['code'];
+
+    $update_status = "Verified";
+    $update_code = 0;
+
+    $update_query = "UPDATE users SET status = '$update_status' , code = $update_code WHERE code = $fetch_code";
+    $update_result = mysqli_query($db, $update_query);
+
+    if ($update_result) {
+      header('Location: login.php');
+    } else {
+      $errors['db_error'] = "Failed To Insering Data In Database!";
+    }
+  } else {
+     $errors['otp_error'] = "You enter invalid verification code!";
+  } 
 }
 
 ?>

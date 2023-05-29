@@ -3,10 +3,10 @@
 // cek login
 session_start();
 
-require 'backend/functions.php';
+require "backend/functions.php";
 
-$pageName = "Forgot Password";
-$name = "forgot";
+$pageName = "OTP Verification";
+$name = "otp";
 $errors = [];
 
 // cek cookie 
@@ -19,8 +19,8 @@ if (isset($_SESSION['login']) && isset($_SESSION['ids']) && isset($_SESSION['rls
   exit();
 }
 
-if(isset($_POST['forgotPass'])) {
-  $forgot = forgotPass($_POST);
+if(isset($_POST['verify'])) {
+  $otp = otp($_POST);
 }
 
-require('views/forgot.view.php'); 
+require("views/otp.view.php");

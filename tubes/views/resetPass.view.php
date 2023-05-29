@@ -1,9 +1,9 @@
 <?php require('partials/header.php'); ?>
 
-<div class="forgot">
+<section class="resetPass">
   <div class="container">
-    <h2>Email Check</h2>
-    <div class="line"></div>
+    <h2>Password</h2>
+    <div id="line"></div>
     <form action="" method="POST" autocomplete="off">
       <?php
       if($errors > 0){
@@ -14,10 +14,11 @@
         }
       }
       ?>      
-      <input type="email" name="email" placeholder="Email" required> <br>
-      <input type="submit" name="forgotPass" value="Check">
+      <input type="password" name="password" placeholder="Password" required><br>
+      <input type="password" name="confirmPassword" placeholder="Confirm Password" required><br>
+      <input type="submit" name="resetPass" value="Save">
     </form>
   </div>
-</div>
+</section>
 
 <?php require('partials/footer.php'); ?>

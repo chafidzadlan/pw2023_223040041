@@ -1,35 +1,19 @@
 <?php require('partials/header.php'); ?>
 
-<!-- LOG IN -->
-<div class="login">
-    <div class="container">
-      <div class="wrapper">
-        <div class="title">Masuk sebagai siswa</div>
-        <div class="sub-title">Sudah punya akun? Yuk masuk untuk <br> mengakses beragam fitur</div>
-        <form action="" method="post">
-          <div class="field">
-            <input type="text" name="username" id="username" required>
-            <label for="username">Username</label>
-          </div>
-          <div class="field">
-            <input type="password" name="password" id="password" required>
-            <label for="password">Password</label>
-          </div>
-          <div class="content">
-            <div class="checkbox">
-              <input type="checkbox" name="remember" id="remember">
-              <label for="remember">Ingat saya</label>
-            </div>
-            <div class="pass-link"><a href="forgot.php">Lupa Password?</a></div>
-          </div>
-          <div class="field">
-            <button name="login" type="submit" class="btn btn-primary">Masuk</button>
-          </div>
-          <div class="signup-link">Belum punya akun? <a href="register.php">Daftar disini</a></div>
-        </form>
-      </div>
-
-    </div>
+<section class="login">
+  <div class="container">
+    <h2>Login</h2>
+    <div class="line"></div>
+    <form action="" method="POST" autocomplete="off">
+      <!-- <label for="Email">Email</label> -->
+      <input type="email" name="email" id="email" required placeholder="Email">
+      <!-- <label for="password">Password</label> -->
+      <input type="password" name="password" placeholder="Password">
+      <input type="submit" name="login" value="Login">
+      <a href="forgot.php" id="forgot">Forgot Your Password?</a>
+      <h3>Don't have a account? <a href="register.php">Sign Up</a></h3>
+    </form>
   </div>
+</section>
 
 <?php require('partials/footer.php'); ?>

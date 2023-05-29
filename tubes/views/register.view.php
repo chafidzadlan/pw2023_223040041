@@ -3,16 +3,18 @@
   <!-- REGISTER -->
   <section class="register" id="register">
     <div class="container">
-
-      <div class="register-content">
-        <h2 class="h2 register-title">Ayo daftar sekarang</h2>
-
-        <figure class="register-banner">
-          <img src="img/register.png" alt="register banner">
-        </figure>
-      </div>
-
-      <form action="" method="post" class="register-form">
+      <h2>Ayo daftar sekarang</h2>
+      <div class="line"></div>
+      <form action="" method="post" autocomplete="off">
+        <?php
+          if($errors > 0){
+            foreach($errors AS $displayErrors){
+            ?>
+            <div id="alert"><?php echo $displayErrors; ?></div>
+            <?php
+            }
+          }
+        ?> 
 
         <div class="input-wrapper">
           <label for="username" class="input-label">Username</label>
@@ -41,17 +43,14 @@
 
         <div class="input-wrapper">
           <label for="date" class="input-label">Date of Birth</label>
-          <input type="date"class="input-field"  id="date" placeholder="05-05-1955" name="date" required>
+          <input type="date"class="input-field"  id="date" name="date" required>
         </div>
 
         <div class="button-list">
-          <button type="submit" name="register" class="btn btn-primary">Daftar</button>
-          <a href="login.php" class="btn btn-primary">Login</a>
-          <a href="index.php" class="btn btn-primary">Kembali</a>
+          <input type="submit" name="register" value="Daftar">
         </div>
-        
       </form>
-
+      <h3>Already have a account ? <a href="login.php">Login</a></h3>
     </div>
   </section>
 
