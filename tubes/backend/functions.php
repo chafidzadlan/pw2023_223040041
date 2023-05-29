@@ -142,7 +142,17 @@ function edit($data, $jenis, $id) {
   mysqli_query($db, $query);
 
   return mysqli_affected_rows($db);
-  
+}
+
+// SEARCH
+function search($keyword) {
+  $query = "SELECT * FROM users 
+            WHERE 
+            username LIKE '%$keyword%' OR 
+            email LIKE '%$keyword%' OR 
+            status LIKE '%$keyword%' OR 
+            address LIKE '%$keyword%'";
+  return query($query);
 }
 
 // COOKIE
@@ -200,48 +210,6 @@ function cookieOpt($data) {
 // CEK USER
 function cekUser($data) {
   return query("SELECT username, id_users FROM users WHERE id_users = '$data'")[0];
-}
-
-// TIME TAMBAH SQL
-function timeTambahSQL($tanggal, $tambah) {
-  $date = date_create($tanggal);
-  date_add($date, date_interval_create_from_date_string($tambah));
-  return date_format($date, "Y-m-d H:i:s");
-}
-
-// TOKEN RESET PASSWORD
-function tokenResetPass($data) {
-  $db = dbConn();
-
-  $username = htmlspecialchars(strtolower(str_replace(' ', '', $data['username'])));
-  $email = htmlspecialchars($data['email']);
-  $date = date("Y-m-d H:i:s");
-  $date24 = timeTambahSQL($date, "24 Hours");
-
-  if($query = query("SELECT username, email, id_users FROM users WHERE username = '$username' AND email = '$email'")) {
-    $iduser = $query[0]['id_users'];
-    if(!query("SELECT * FROM id_users = '$iduser' AND expired > '$date'")) {
-      // hapus uniqnya
-      mysqli_query($db, "DELETE FROM user_token WHERE id_users = '$iduser' AND expired < '$date'");
-
-      // buat uniqurl
-      $url = uniqid();
-      mysqli_query($db, "INSERT INTO user_token VALUES('$iduser', '$url', '$date24')");
-      $url = query("SELECT token FROM user_token WHERE id_users = '$iduser'")[0];
-      $url = base_url() . "forgot?reset=" . $url['token'];
-      echo "</script>
-              alert('Link untuk mengganti password telah dikirim ke email anda.');
-            </script>";
-    } else {
-      echo "</script>
-              alert('Anda sudah membuat request.');
-            </script>";
-    }
-  } else {
-    echo "</script>
-              alert('Username atau email salah.');
-            </script>";
-  }
 }
 
 // RESET PASSWORD
@@ -423,20 +391,11 @@ function register($data) {
     return false;
   }
 
-  // check email validation and save information
-  $sql = "SELECT * FROM users WHERE email = '$email'";
-  $res = mysqli_query($db, $sql) or die('query failed');
-  if(mysqli_num_rows($res) > 0) {
-    echo '<script>
-            alert("Email is Already Taken");
-          </script>';
-  }
-
-  // cek username sudah ada atau belum
-  $result = mysqli_query($db, "SELECT username, email FROM users WHERE username = '$username'");
+  // cek email sudah ada atau belum
+  $result = mysqli_query($db, "SELECT username, email FROM users WHERE email = '$email'");
   if (mysqli_fetch_assoc($result)) {
     echo '<script>
-            alert("Username sudah terdaftar");
+            alert("Email sudah terdaftar");
           </script>';
     return false;
   }

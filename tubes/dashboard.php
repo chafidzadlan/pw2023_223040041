@@ -13,7 +13,7 @@ if ($_SESSION['rls'] !== "a") {
   exit();
 }
 
-$login = false;
+
 $pageName = "Admin Dashboard";
 $name = "dashboard";
 
@@ -33,12 +33,25 @@ if (isset($_POST['create'])) {
   if (!$editProfile['error']) {
     echo "<script>
     setTimeout(function() {
-        document.location.href='dashboard'
+        document.location.href='dashboard.php'
     }, 3000);
     </script>";
   }
 }
 
-$users = query("SELECT * FROM users");
+// pagination
+// konfigurasi
+$jumlahDataPerHalaman = 4;
+$jumlahData = count(query("SELECT * FROM users"));
+$jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+$halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
+$awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
+
+$users = query("SELECT * FROM users LIMIT $awalData, $jumlahDataPerHalaman");
+
+// tombol search ditekan
+if(isset($_POST['search'])) {
+  $users = search($_POST["keyword"]);
+}
 
 require('views/dashboard.view.php');

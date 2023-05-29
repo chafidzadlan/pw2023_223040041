@@ -10,11 +10,16 @@
 	<link rel="stylesheet" href="css/dashboard.css">
 
 	<title>AdminHub</title>
+	<style>
+		@media print {
+			body {
+				display: none;
+			}
+		}
+	</style>
 </head>
 <body>
 	
-
-
   <!-- SIDEBAR -->
   <section id="sidebar">
 		<a href="#" class="brand">
@@ -23,25 +28,13 @@
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
-				<a href="#">
+				<a href="">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-group' ></i>
-					<span class="text">Team</span>
-				</a>
-			</li>
 		</ul>
 		<ul class="side-menu">
-			<li>
-				<a href="#">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
-				</a>
-			</li>
 			<li>
 				<a href="logout.php" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
@@ -57,18 +50,7 @@
 		<nav>
 			<i class='bx bx-menu' ></i>
 			<a href="#" class="nav-link">Categories</a>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-			</a>
-			<a href="#" class="profile">
-				<img src="#">
-			</a>
+			
 		</nav>
 
 		<!-- MAIN -->
@@ -86,43 +68,22 @@
 						</li>
 					</ul>
 				</div>
-				<a href="#" class="btn-download">
+				<a href="backend/cetakPdf.php" class="btn-download">
 					<i class='bx bxs-cloud-download' ></i>
 					<span class="text">Download PDF</span>
 				</a>
 			</div>
 
-			<ul class="box-info">
-				<li>
-					<i class='bx bxs-calendar-check' ></i>
-					<span class="text">
-						<h3>0</h3>
-						<p>New Order</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-group' ></i>
-					<span class="text">
-						<h3>0</h3>
-						<p>Visitors</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-dollar-circle' ></i>
-					<span class="text">
-						<h3>0</h3>
-						<p>Total Sales</p>
-					</span>
-				</li>
-			</ul>
-
-
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Recent Orders</h3>
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
+						<h3>User Info</h3>
+						<form action="" method="post">
+							<div class="form-input">
+								<input type="tex" name="keyword" size="40" autofocus placeholder="Search..." autocomplete="off" id="keyword">
+								<button type="submit" name="search" id="tombol-cari" class="search-btn"><i class='bx bx-search' ></i></button>
+							</div>
+						</form>
 					</div>
 					<table>
 						<thead>
@@ -140,18 +101,36 @@
 							</tr>
 							<?php $i++; ?>
 							<?php endforeach; ?>
+
 						</thead>
 						
 					</table>
 				</div>
 				<div class="todo">
 					<div class="head">
-						<h3>Todos</h3>
+						<h3>Ranking</h3>
 						<i class='bx bx-plus' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>
 				</div>
 			</div>
+			<!-- NAVIGASI -->
+
+			<?php if($halamanAktif > 1) : ?>
+				<a href="?halaman=<?= $halamanAktif - 1; ?>" class="tombol">&laquo;</a>
+			<?php endif; ?>
+
+			<?php for($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+				<?php if($i == $halamanAktif) : ?>
+					<a href="?halaman=<?= $i; ?>" class="tombol" style="font-weight: bold; color: red;"><?= $i; ?></a>
+				<?php else : ?>
+					<a href="?halaman=<?= $i; ?>" class="tombol"><?= $i; ?></a>
+				<?php endif; ?>
+			<?php endfor; ?>
+
+			<?php if($halamanAktif < $jumlahHalaman) : ?>
+				<a href="?halaman=<?= $halamanAktif + 1; ?>" class="tombol">&raquo;</a>
+			<?php endif; ?>
 		</main>
 	</section>
 

@@ -6,38 +6,42 @@
 
   <h3>Daftar Mahasiswa</h3>
 
-  <a href="tambah.php" class="btn btn-primary">Tambah Data Mahasiswa</a>
+  <a href="tambah.php" class="btn btn-primary text-decoration-none">Tambah Data Mahasiswa</a>
 
-  <table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Gambar</th>
-      <th scope="col">Nama</th>
-      <th scope="col">Nim</th>
-      <th scope="col">Email</th>
-      <th scope="col">Jurusan</th>
-      <th scope="col">Aksi</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach ($students as $key => $student) : ?>
-    <tr>
-      <th scope="row"><?= $key+1; ?></th>
-      <td><img width="50" class="rounded-circle" src="img/<?= $student['gambar']; ?>" alt="Gambar <?= $student['nama']; ?>"></td>
-      <td><?= $student['nama']; ?></td>
-      <td><?= $student['nim']; ?></td>
+  <table class="table">
+    <thead class="">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Gambar</th>
+        <th scope="col">NIM</th>
+        <th scope="col">Nama</th>
+        <th scope="col">Email</th>
+        <th scope="col">Jurusan</th>
+        <th scope="col">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php $i = 1; ?>
+      <?php
+      foreach ($students as $student) : ?>
+        <tr>
+          <th scope="row"><?= $i; ?></th>
+          <td><img src="img/<?= $student['gambar']; ?>" class="rounded-circle" width="50"></td>
+          <td><?= $student['nim']; ?></td>
+          <td><?= $student['nama']; ?></td>
+          <td><?= $student['email']; ?></td>
+          <td><?= $student['jurusan']; ?></td>
+          <td>
+            <a href="" class="badge text-bg-warning text-decoration-none">Ubah</a> |
+            <a href="" class="badge text-bg-danger text-decoration-none">Hapus</a>
+          </td>
+        </tr>
+        <?php $i++; ?>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
 
-      <td><?= $student['email']; ?></td>
-      <td><?= $student['jurusan']; ?></td>
-      <td>
-        <a href="" class="btn btn-warning">Ubah</a>
-        <a href="" class="btn btn-danger">Hapus</a>
-      </td>
-    </tr>
-    <?php endforeach; ?>
-  </tbody>
-</table>
+
 </div>
 
 <?php require('partials/footer.php'); ?>
