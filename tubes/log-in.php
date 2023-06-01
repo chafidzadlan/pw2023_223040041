@@ -4,8 +4,8 @@ session_start();
 
 require 'backend/functions.php';
 
-$pageName = "Log In";
-$name = "login";
+$pageName = "Login";
+$name = "log-in";
 
 // cek cookie
 if(isset($_COOKIE["id"]) && isset($_COOKIE['uid'])) {
@@ -21,4 +21,4 @@ if(isset($_POST["login"])) {
   $login = login($_POST);
 }
 
-require('views/login.view.php');
+require('views/log-in.view.php');

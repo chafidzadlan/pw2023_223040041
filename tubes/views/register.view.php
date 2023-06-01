@@ -50,7 +50,7 @@
           <input type="submit" name="register" value="Daftar">
         </div>
       </form>
-      <h3>Already have a account ? <a href="login.php">Login</a></h3>
+      <h3>Already have a account ? <a href="log-in.php">Login</a></h3>
     </div>
   </section>
 

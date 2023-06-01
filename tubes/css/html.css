@@ -7,10 +7,12 @@
   --primary-color: hsl(350, 73%, 49%);
   --secondary-color: #fff;
   --hover-color: hsl(0, 0%, 100%, 0.8);
+  --hover-primary-color: hsl(350, 74%, 35%);
   --black-color: #000;
   --gray-color: hsl(236, 5%, 49%);
   --darkgray-color: hsl(210, 1%, 29%);
   --blue-color: hsl(228, 44%, 46%);
+  --snow-color: hsl(0, 0%, 96%);
 
   /**
    * typography
@@ -49,7 +51,10 @@
 
 li { list-style: none; }
 
-a { text-decoration: none; }
+a { 
+  text-decoration: none; 
+  color: var(--blue-color);
+}
 
 a,
 img,
@@ -115,7 +120,10 @@ body {
   font-size: var(--fs-1);
 }
 
-.h2 { font-size: var(--fs-2); }
+.h2 { 
+  font-size: var(--fs-2);
+  color: var(--secondary-color);
+}
 
 .h3 {
   color: var(--secondary-color);
@@ -209,74 +217,52 @@ header .container {
 
 .navbar .btn-primary { display: none; }
 
-/* LOGIN */
-.login {
-  height: 100vh;
-  width: 100%;
-  display: grid;
-  place-items: center;
-  background-color: var(--primary-color);
+/* HTML */
+.html {
+  background-color: var(--snow-color);
+  padding: 50px;
+  display: flex;
 }
-.login .container {
-  height: auto;
-  width: 450px;
+.html .container {
+  width: 70%;
   background-color: var(--secondary-color);
-  padding: 25px;
-  border-radius: 5px;
-  position: relative;
-  box-shadow: -2px 2px 12px var(--black-color);
+  padding: 50px;
+  border: 1px solid #eee;
 }
 
 .container h2 {
-  font-size: 40px;
+  padding-bottom: 20px;
 }
 
-.container .line  {
-  height: 1px;
-  width: 100%;
+.container ul {
+  padding-top: 20px;
+}
+
+.container p {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.html-list {
+  width: 30%;
+  margin: 0 20px;
+}
+
+.html-list h2 {
+  padding-bottom: 20px;
+}
+
+.html-list ul {
+  padding-top: 20px;
+}
+
+pre {
+  padding: 5px;
+  font-size: 14px;
   background-color: var(--black-color);
-  margin: 10px 0 20px 0;
-}
-
-.container input {
-  height: 40px;
-  width: 99%;
-  margin: 5px 0;
-  border: 1px solid var(--black-color);
-  font-size: 15px;
-  background: var(--secondary-color);
-  outline: none;
-  border-radius: 6px;
-  padding: 0px 12px;
-}
-
-.container input[type="submit"]
-{
-  height: 45px;
-  border: none;
-  background: var(--primary-color);
   color: var(--secondary-color);
-  font-size: 20px;
-  margin: 5px 0;
-  cursor: pointer;
 }
 
-.container h3 {
-  font-size: 17px;
-  font-weight: 100;
-  margin: 8px 0;
-}
-
-.container a {
-  font-size: 17px;
-  margin: 12px 0 5px 0;
-  text-decoration: none;
-  color: #013ca9;
-}
-
-.container #forgot {
-  display: block;
-}
 
 
 /* FOOTER */
@@ -502,11 +488,6 @@ footer .logo {
   }
 
   .navbar .btn-primary { display: block; }
-
-  /* LOGIN */
-  .wrapper {
-    width: 50%;
-  }
   
 
   /* FOOTER */

@@ -2,7 +2,7 @@
 
     <div class="container">
 
-      <a href="#" class="logo">
+      <a href="index.php" class="logo">
         <ion-icon name="accessibility-outline"></ion-icon>
       </a>
 
@@ -17,7 +17,7 @@
           <ul class="navbar-list">
 
             <li class="nav-item">
-              <a href="#" class="nav-link">Kelas</a>
+              <a href="kelas.php" class="nav-link">Kelas</a>
             </li>
 
             <li class="nav-item">
@@ -42,7 +42,7 @@
             </div>
           <?php } else { ?>
             <a href="register.php" class="btn btn-primary">Daftar</a>
-            <a href="login.php" class="btn btn-primary">Masuk</a>
+            <a href="log-in.php" class="btn btn-primary">Masuk</a>
           <?php } ?>
         </nav>
 

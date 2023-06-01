@@ -5,7 +5,7 @@ session_start();
 require 'backend/functions.php';
 
 if(!isset($_SESSION['login']) && !isset($_SESSION['ids']) && !isset($_SESSION['rls'])) {
-  header("Location: login.php");
+  header("Location: log-in.php");
   exit();
 }
 
