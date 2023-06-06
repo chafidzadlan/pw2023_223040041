@@ -505,9 +505,10 @@ ion-icon {
   }
 
   .nav-link {
-    color: var(--blue-color);
+    color: var(--secondary-color);
   }
 
+ 
 
 
   /**
@@ -659,7 +660,7 @@ ion-icon {
    * HEADER
    */
 
-  .navbar-menu-btn { display: none; }
+  
 
   .navbar {
     max-height: unset;
@@ -675,8 +676,7 @@ ion-icon {
   .navbar-list {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-right: 20px;
+    
   }
 
   .nav-link {

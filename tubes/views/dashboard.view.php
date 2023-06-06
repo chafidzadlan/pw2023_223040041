@@ -3,9 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<!-- Boxicons -->
-	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	
 	<!-- My CSS -->
 	<link rel="stylesheet" href="css/dashboard.css">
 
@@ -23,13 +21,13 @@
   <!-- SIDEBAR -->
   <section id="sidebar">
 		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+			<ion-icon name="happy"></ion-icon>
 			<span class="text">AdminHub</span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
 				<a href="">
-					<i class='bx bxs-dashboard' ></i>
+					<ion-icon name="apps"></ion-icon>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
@@ -37,7 +35,7 @@
 		<ul class="side-menu">
 			<li>
 				<a href="logout.php" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
+					<ion-icon name="log-out-outline"></ion-icon>
 					<span class="text">Logout</span>
 				</a>
 			</li>
@@ -48,9 +46,8 @@
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
+			<ion-icon name="menu-outline"></ion-icon>
 			<a href="#" class="nav-link">Categories</a>
-			
 		</nav>
 
 		<!-- MAIN -->
@@ -62,14 +59,14 @@
 						<li>
 							<a href="#">Dashboard</a>
 						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
+						<li><ion-icon name="chevron-forward"></ion-icon></li>
 						<li>
 							<a class="active" href="#">Home</a>
 						</li>
 					</ul>
 				</div>
 				<a href="backend/cetakPdf.php" class="btn-download">
-					<i class='bx bxs-cloud-download' ></i>
+					<ion-icon name="cloud-download"></ion-icon>
 					<span class="text">Download PDF</span>
 				</a>
 			</div>
@@ -80,17 +77,21 @@
 						<h3>User Info</h3>
 						<form action="" method="post">
 							<div class="form-input">
-								<input type="tex" name="keyword" size="40" autofocus placeholder="Search..." autocomplete="off" id="keyword">
-								<button type="submit" name="search" id="tombol-cari" class="search-btn"><i class='bx bx-search' ></i></button>
+								<input type="text" name="keyword" class="keyword" size="40" autofocus placeholder="Search..." autocomplete="off" id="keyword">
+								<button type="submit" name="search" id="tombol-cari" class="search-btn">									
+									<ion-icon name="search"></ion-icon>
+								</button>
 							</div>
 						</form>
 					</div>
 					<table>
 						<thead>
 							<tr>
-								<th>id</th>
+								<th>Id</th>
 								<th>Nama</th>
-								<th>email</th>
+								<th>Email</th>
+								<th>Address</th>
+								<th>Status</th>
 							</tr>
 							<?php $i = 1; ?>
 							<?php foreach ($users as $user) : ?>
@@ -98,43 +99,45 @@
 								<th><?= $user["id_users"]; ?></th>
 								<th><?= $user["username"]; ?></th>
 								<th><?= $user["email"]; ?></th>
+								<th><?= $user["address"]; ?></th>
+								<th><?= $user["status"]; ?></th>	
 							</tr>
 							<?php $i++; ?>
 							<?php endforeach; ?>
-
 						</thead>
-						
 					</table>
-				</div>
-				<div class="todo">
-					<div class="head">
-						<h3>Ranking</h3>
-						<i class='bx bx-plus' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
 				</div>
 			</div>
 			<!-- NAVIGASI -->
-
+			
+			<div class="pagination">
 			<?php if($halamanAktif > 1) : ?>
-				<a href="?halaman=<?= $halamanAktif - 1; ?>" class="tombol">&laquo;</a>
+				<a href="?halaman=<?= $halamanAktif - 1; ?>" class="tombol">
+					<ion-icon name="chevron-back"></ion-icon>
+				</a>
 			<?php endif; ?>
 
 			<?php for($i = 1; $i <= $jumlahHalaman; $i++) : ?>
 				<?php if($i == $halamanAktif) : ?>
-					<a href="?halaman=<?= $i; ?>" class="tombol" style="font-weight: bold; color: red;"><?= $i; ?></a>
+					<a href="?halaman=<?= $i; ?>" class="tombol" style="font-weight: bold; color: var(--blue-color);"><?= $i; ?></a>
 				<?php else : ?>
 					<a href="?halaman=<?= $i; ?>" class="tombol"><?= $i; ?></a>
 				<?php endif; ?>
 			<?php endfor; ?>
 
 			<?php if($halamanAktif < $jumlahHalaman) : ?>
-				<a href="?halaman=<?= $halamanAktif + 1; ?>" class="tombol">&raquo;</a>
+				<a href="?halaman=<?= $halamanAktif + 1; ?>" class="tombol">
+					<ion-icon name="chevron-forward"></ion-icon>
+				</a>
 			<?php endif; ?>
+			</div>
 		</main>
 	</section>
 
-  <script src="js/<?= $name; ?>.js"></script>
+
+	<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+	<script src="js/custom.js"></script>
   
 </body>
 </html>

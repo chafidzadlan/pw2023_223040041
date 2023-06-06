@@ -24,7 +24,6 @@ header('Expires: 0');
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- JS -->
-  <script src="js/sweetalert2/sweetalert2.all.min.js"></script>
   <script src="js/jquery/jquery-3.7.0.min.js"></script>
   <script src="js/custom.js"></script>
   

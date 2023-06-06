@@ -41,7 +41,7 @@ if (isset($_POST['create'])) {
 
 // pagination
 // konfigurasi
-$jumlahDataPerHalaman = 4;
+$jumlahDataPerHalaman = 5;
 $jumlahData = count(query("SELECT * FROM users"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;

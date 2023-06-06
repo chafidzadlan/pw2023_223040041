@@ -62,12 +62,6 @@ $login = true;
             <li class="nav-item">
               <a href="../kelas.php" class="nav-link">Kelas</a>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">Alur Belajar</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">Bootcamp</a>
-            </li>
           </ul>
           <?php if ($login) { ?>
             <div class="dropdown">

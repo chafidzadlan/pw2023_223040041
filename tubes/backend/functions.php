@@ -272,7 +272,7 @@ function resetPass($data) {
       $newPassword = password_hash($password, PASSWORD_DEFAULT);  
       $query = "UPDATE users SET password = '$newPassword' WHERE email = '$email'";
       $result = mysqli_query($db, $query) or die("Query Failed");
-      header("Location: login.php");
+      header("Location: log-in.php");
     }
   }
 }
@@ -400,13 +400,7 @@ function register($data) {
     return false;
   }
 
-  // min. password
-  if(strlen($password1) < 8) {
-    echo "<script>
-            alert('Password kurang dari 8 karakter!');
-          </script>";
-    return false;
-  }
+  
 
   // password1 = password2
 
@@ -489,7 +483,7 @@ function otp($data) {
     $update_result = mysqli_query($db, $update_query);
 
     if ($update_result) {
-      header('Location: login.php');
+      header('Location: log-in.php');
     } else {
       $errors['db_error'] = "Failed To Insering Data In Database!";
     }

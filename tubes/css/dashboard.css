@@ -8,6 +8,7 @@
 
 a {
 	text-decoration: none;
+	color: var(--secondary-color);
 }
 
 li {
@@ -74,7 +75,7 @@ body {
 	padding-bottom: 20px;
 	box-sizing: content-box;
 }
-#sidebar .brand .bx {
+#sidebar .brand ion-icon {
 	min-width: 60px;
 	display: flex;
 	justify-content: center;
@@ -141,7 +142,7 @@ body {
 #sidebar .side-menu.top li a:hover {
 	color: var(--blue-color);
 }
-#sidebar .side-menu li a .bx {
+#sidebar .side-menu li a ion-icon {
 	min-width: calc(60px  - ((4px + 6px) * 2));
 	display: flex;
 	justify-content: center;
@@ -194,7 +195,7 @@ body {
 #content nav a {
 	color: var(--secondary-color);
 }
-#content nav .bx.bx-menu {
+#content nav ion-icon {
 	cursor: pointer;
 	color: var(--secondary-color);
 }
@@ -275,7 +276,7 @@ body {
 /* MAIN */
 #content main {
 	width: 100%;
-	padding: 36px 24px;
+	padding: 24px;
 	font-family: var(--poppins);
 	max-height: calc(100vh - 56px);
 	overflow-y: auto;
@@ -339,7 +340,7 @@ body {
 	align-items: center;
 	grid-gap: 24px;
 }
-#content main .box-info li .bx {
+#content main .box-info li ion-icon {
 	width: 80px;
 	height: 80px;
 	border-radius: 10px;
@@ -348,15 +349,15 @@ body {
 	justify-content: center;
 	align-items: center;
 }
-#content main .box-info li:nth-child(1) .bx {
+#content main .box-info li:nth-child(1) ion-icon {
 	background: var(--blue-color);
 	color: var(--secondary-color);
 }
-#content main .box-info li:nth-child(2) .bx {
+#content main .box-info li:nth-child(2) ion-icon {
 	background: yellow;
 	color: var(--secondary-color);
 }
-#content main .box-info li:nth-child(3) .bx {
+#content main .box-info li:nth-child(3) ion-icon {
 	background: orange;
 	color: var(--secondary-color);
 }
@@ -368,8 +369,6 @@ body {
 #content main .box-info li .text p {
 	color: var(--secondary-color);	
 }
-
-
 
 
 
@@ -398,7 +397,7 @@ body {
 	font-size: 24px;
 	font-weight: 600;
 }
-#content main .table-data .head .bx {
+#content main .table-data .head ion-icon {
 	cursor: pointer;
 }
 
@@ -411,7 +410,8 @@ body {
 	border-collapse: collapse;
 }
 #content main .table-data .order table th {
-	padding-bottom: 12px;
+	padding-top: 9px;
+	padding-bottom: 9px;
 	font-size: 13px;
 	text-align: left;
 	border-bottom: 1px solid var(--secondary-color);
@@ -451,38 +451,48 @@ body {
 	background: orange;
 }
 
-
-#content main .table-data .todo {
-	flex-grow: 1;
-	flex-basis: 300px;
-}
-#content main .table-data .todo .todo-list {
-	width: 100%;
-}
-#content main .table-data .todo .todo-list li {
-	width: 100%;
-	margin-bottom: 16px;
-	background: var(--secondary-color);
-	border-radius: 10px;
-	padding: 14px 20px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-#content main .table-data .todo .todo-list li .bx {
-	cursor: pointer;
-}
-#content main .table-data .todo .todo-list li.completed {
-	border-left: 10px solid var(--blue-color);
-}
-#content main .table-data .todo .todo-list li.not-completed {
-	border-left: 10px solid orange;
-}
-#content main .table-data .todo .todo-list li:last-child {
-	margin-bottom: 0;
-}
 /* MAIN */
 /* CONTENT */
+
+/* KEYWORD */
+.keyword {
+	padding: 10px;
+	border-radius: 25px;
+	outline: none;
+ 	border: none;
+	background: var(--secondary-color);
+	padding-left: 20px;
+	font-size: 14px;
+}
+.search-btn {
+  background: var(--secondary-color);
+  text-align: center;
+	margin: auto;
+	padding: 10px;
+  font-size: 14px;
+  border-radius: 25px;
+	border: none;
+	outline: none;
+}
+
+/* PAGINATION */
+.pagination {
+	display: flex;
+	align-items: center;
+	width: max-content;
+	background-color: var(--primary-color);
+	padding: 5px 20px;
+	margin: 5px;
+	border-radius: 10px;
+}
+
+.tombol {
+	padding: 5px 10px;
+}
+
+.tombol ion-icon {
+	padding-top: 5px;
+}
 
 
 

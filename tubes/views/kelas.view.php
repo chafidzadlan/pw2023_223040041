@@ -16,10 +16,6 @@
             <ion-icon name="book-outline"></ion-icon>
             <p>18 Materi</p>
           </div>  
-          <div class="sub-card">
-            <ion-icon name="star-outline"></ion-icon>
-            <p>1800 Poin</p>
-          </div>
           <a href="html/html.php" class="btn btn-primary">Selengkapnya</a>
         </div>
       </li>
@@ -33,11 +29,7 @@
             <ion-icon name="book-outline"></ion-icon>
             <p>7 Materi</p>
           </div>  
-          <div class="sub-card">
-            <ion-icon name="star-outline"></ion-icon>
-            <p>700 Poin</p>
-          </div>
-          <a href="css/css.php" class="btn btn-primary">Selengkapnya</a>
+          <a href="#" onclick="alert('Kelas belum tersedia');" class="btn btn-primary">Selengkapnya</a>
         </div>
       </li>
       <li>
@@ -50,11 +42,7 @@
             <ion-icon name="book-outline"></ion-icon>
             <p>11 Materi</p>
           </div>  
-          <div class="sub-card">
-            <ion-icon name="star-outline"></ion-icon>
-            <p>1100 Poin</p>
-          </div>
-          <a href="javascript/javascript.php" class="btn btn-primary">Selengkapnya</a>
+          <a href="#" onclick="alert('Kelas belum tersedia');" class="btn btn-primary">Selengkapnya</a>
         </div>
       </li>
     </ul>

@@ -8,26 +8,12 @@
 
       <div class="navbar-wrapper">
 
-        <button class="navbar-menu-btn" data-navbar-toggle-btn>
-          <ion-icon name="menu-outline"></ion-icon>
-        </button>
-
         <nav class="navbar" data-navbar>
 
           <ul class="navbar-list">
-
             <li class="nav-item">
               <a href="kelas.php" class="nav-link">Kelas</a>
             </li>
-
-            <li class="nav-item">
-              <a href="#" class="nav-link">Alur Belajar</a>
-            </li>
-
-            <li class="nav-item">
-              <a href="#" class="nav-link">Bootcamp</a>
-            </li>
-
           </ul>
           
           <?php if ($login) { ?>
