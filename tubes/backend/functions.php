@@ -362,7 +362,7 @@ function login($data) {
       }
     } else {
       echo "<script>
-              alert('Password did not matched');
+              alert('Username atau password salah.');
             </script>";
     }
   }
@@ -437,6 +437,62 @@ function register($data) {
     } else {
       $errors['db_errors'] = "Failed while inserting data into database!";
     }
+}
+
+// REGISTER
+function registerAdmin($data) {
+  $db = dbConn();
+
+  $username = strtolower(stripslashes($data["username"]));
+  $email = htmlspecialchars($data['email']);
+  $password1 = mysqli_real_escape_string($db, $data['password1']);
+  $password2 = mysqli_real_escape_string($db, $data['password2']);
+  $address = htmlspecialchars($data['address']);
+  $date = htmlspecialchars($data['date']);
+
+
+  if (empty($username) || empty($password1) || empty($password2) || empty($email) || empty($address) || empty($date)) {
+    echo '<script>
+            alert("Field jangan kosong!");
+          </script>';
+    return false;
+  }
+
+  // cek email sudah ada atau belum
+  $result = mysqli_query($db, "SELECT username, email FROM users WHERE email = '$email'");
+  if (mysqli_fetch_assoc($result)) {
+    echo '<script>
+            alert("Email sudah terdaftar");
+          </script>';
+    return false;
+  }
+
+  
+
+  // password1 = password2
+
+  if ($password1 !== $password2) {
+    echo '<script>
+            alert("konfirmasi password tidak sesuai!");
+          </script>';
+    return false;
+  }
+
+  // lolos
+  if(empty($gambar)) {
+    $gambar = 'dummy.jpg';
+  }
+
+  $password = password_hash($password1, PASSWORD_DEFAULT);
+  $query = "INSERT INTO users VALUES (null, '$username', '$email', '$password', '$address', '$date', '$gambar', 0, 'Verified', 1)";
+  $result = mysqli_query($db, $query);
+
+  if($result) {
+    echo '<script>
+            alert("Akun Admin berhasil dibuat!, Silahkan login");
+          </script>';
+  }
+  
 }
 
 // Verify Email

@@ -8,7 +8,7 @@
 
       <div class="navbar-wrapper">
 
-        <nav class="navbar" data-navbar>
+        <nav class="navbar" id="navbar" data-navbar>
 
           <ul class="navbar-list">
             <li class="nav-item">

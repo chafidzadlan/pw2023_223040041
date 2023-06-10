@@ -7,12 +7,10 @@
   --primary-color: hsl(350, 73%, 49%);
   --secondary-color: #fff;
   --hover-color: hsl(0, 0%, 100%, 0.8);
-  --hover-primary-color: hsl(350, 74%, 35%);
   --black-color: #000;
   --gray-color: hsl(236, 5%, 49%);
   --darkgray-color: hsl(210, 1%, 29%);
   --blue-color: hsl(228, 44%, 46%);
-  --snow-color: hsl(0, 0%, 96%);
 
   /**
    * typography
@@ -117,10 +115,7 @@ body {
   font-size: var(--fs-1);
 }
 
-.h2 { 
-  font-size: var(--fs-2);
-  color: var(--secondary-color);
-}
+.h2 { font-size: var(--fs-2); }
 
 .h3 {
   color: var(--secondary-color);
@@ -214,19 +209,18 @@ header .container {
 
 .navbar .btn-primary { display: none; }
 
-/* LOGIN */
-.login {
-  height: 100vh;
+/* RESET PASSWORD */
+.register {
+  height: 750px;
   width: 100%;
   display: grid;
   place-items: center;
-  background: var(--primary-color);
+  background-color: var(--primary-color);
 }
-
-.login .container {
+.register .container {
   height: auto;
-  width: 450px;
-  background: var(--secondary-color);
+  width: 750px;
+  background-color: var(--secondary-color);
   padding: 25px;
   border-radius: 5px;
   position: relative;
@@ -235,12 +229,14 @@ header .container {
 
 .container h2 {
   font-size: 40px;
+  text-align: center;
 }
 
-.container .line {
-  padding: 6px 0 5px 0;
-  font-size: 18px;
-  color: var(--black-color);
+.container .line  {
+  height: 1px;
+  width: 100%;
+  background-color: var(--black-color);
+  margin: 10px 0 20px 0;
 }
 
 .container input {
@@ -249,17 +245,17 @@ header .container {
   margin: 5px 0;
   border: 1px solid var(--black-color);
   font-size: 15px;
-  background: var(--primary-color);
-  color: var(--secondary-color);
+  background: var(--secondary-color);
   outline: none;
   border-radius: 6px;
-  padding: 0 12px;
+  padding: 0px 12px;
 }
 
-.container input[type="submit"] {
+.container input[type="submit"]
+{
   height: 45px;
   border: none;
-  background-color: var(--primary-color);
+  background: var(--primary-color);
   color: var(--secondary-color);
   font-size: 20px;
   margin: 5px 0;
@@ -267,21 +263,21 @@ header .container {
 }
 
 .container h3 {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 100;
-  margin: 8px 0;
+  margin: 5px 0 20px 0;
 }
 
-.container a {
-  font-size: 17px;
-  margin: 12px 0 5px 0;
+.container h3 a {
+  width: 200px;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 20px;
   text-decoration: none;
-  color: var(--primary-color);
-  font-weight: 500;
-}
-
-.container #forgot {
-  display: block;
+  margin: 5px 0;
+  text-align: center;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 
 
@@ -508,6 +504,11 @@ footer .logo {
   }
 
   .navbar .btn-primary { display: block; }
+
+  /* LOGIN */
+  .wrapper {
+    width: 50%;
+  }
   
 
   /* FOOTER */

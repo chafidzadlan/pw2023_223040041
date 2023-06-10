@@ -18,5 +18,11 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+// MOBILE NAVBAR TOGGLE
+const navbar = document.getElementById("navbar");
+const openMenu = document.getElementById("open-menu");
+const closeMenu = document.getElementById("close-menu");
 
-// 
+openMenu.addEventListener("click", function() {
+  navbar.classList.toggle("active");
+})

@@ -1,3 +1,43 @@
+:root {
+
+  /**
+   * colors
+   */
+
+  --primary-color: hsl(350, 73%, 49%);
+  --secondary-color: #fff;
+  --hover-color: hsl(0, 0%, 100%, 0.8);
+  --black-color: #000;
+  --gray-color: hsl(236, 5%, 49%);
+  --darkgray-color: hsl(210, 1%, 29%);
+  --blue-color: hsl(228, 44%, 46%);
+  --snow-color: hsl(0, 0%, 98%);
+ 
+  /**
+   * typography
+   */
+
+  --ff-poppins: "Poppins", sans-sarif;
+
+  --fs-1: 32px;
+  --fs-2: 26px;
+  --fs-3: 22px;
+  --fs-4: 18px;
+  --fs-5: 15px;
+  --fs-6: 14px;
+
+  --fw-700: 700;
+  --fw-600: 600;
+  --fw-500: 500;
+
+  /**
+   * transition
+   */
+
+  --transition: 0.25s ease-in-out;
+
+}
+
 ::-webkit-scrollbar {
   width: 3px;
 }
@@ -55,17 +95,10 @@
   background-color: #f1f1f1;
 }
 
-/* ALERT */
-#alert {
-  height: auto;
-  width: 100%;
-  background: #ee05503b;
-  padding: 0 15px;
-  font-size: 19px;
-  line-height: 40px;
-  margin: 10px 0;
-  color: #000;
-  border-radius: 4px;
+@media (min-width: 450px) {
+  .dropdown-menu {
+    display: block;
+  }
 }
 
 

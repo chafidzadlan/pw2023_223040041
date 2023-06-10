@@ -34,6 +34,12 @@
 		</ul>
 		<ul class="side-menu">
 			<li>
+				<a href="registeradmin.php" class="logout">
+					<ion-icon name="person-add"></ion-icon>
+					<span class="text">Daftar Admin</span>
+				</a>
+			</li>
+			<li>
 				<a href="logout.php" class="logout">
 					<ion-icon name="log-out-outline"></ion-icon>
 					<span class="text">Logout</span>
@@ -77,37 +83,40 @@
 						<h3>User Info</h3>
 						<form action="" method="post">
 							<div class="form-input">
-								<input type="text" name="keyword" class="keyword" size="40" autofocus placeholder="Search..." autocomplete="off" id="keyword">
+								<input type="text" name="keyword" id="keyword" class="keyword" size="40" autofocus placeholder="Search..." autocomplete="off" id="keyword">
 								<button type="submit" name="search" id="tombol-cari" class="search-btn">									
 									<ion-icon name="search"></ion-icon>
 								</button>
 							</div>
 						</form>
 					</div>
-					<table>
-						<thead>
-							<tr>
-								<th>Id</th>
-								<th>Nama</th>
-								<th>Email</th>
-								<th>Address</th>
-								<th>Status</th>
-							</tr>
-							<?php $i = 1; ?>
-							<?php foreach ($users as $user) : ?>
-							<tr>
-								<th><?= $user["id_users"]; ?></th>
-								<th><?= $user["username"]; ?></th>
-								<th><?= $user["email"]; ?></th>
-								<th><?= $user["address"]; ?></th>
-								<th><?= $user["status"]; ?></th>	
-							</tr>
-							<?php $i++; ?>
-							<?php endforeach; ?>
-						</thead>
-					</table>
+					<div id="search-container">
+							<table>
+								<thead>
+									<tr>
+										<th>Id</th>
+										<th>Nama</th>
+										<th>Email</th>
+										<th>Address</th>
+										<th>Status</th>
+									</tr>
+									<?php $i = 1; ?>
+									<?php foreach ($users as $user) : ?>
+									<tr>
+										<th><?= $user["id_users"]; ?></th>
+										<th><?= $user["username"]; ?></th>
+										<th><?= $user["email"]; ?></th>
+										<th><?= $user["address"]; ?></th>
+										<th><?= $user["status"]; ?></th>	
+									</tr>
+									<?php $i++; ?>
+									<?php endforeach; ?>
+								</thead>
+							</table>
+					</div>
 				</div>
 			</div>
+
 			<!-- NAVIGASI -->
 			
 			<div class="pagination">
